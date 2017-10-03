@@ -22,7 +22,7 @@ class PostList(TemplateView):
         posts = get_posts()
         for post in posts:
             post['slug'] = slugify(post['title'])
-        title = "Posts"
+        title = "Home"
         return render(request, self.template_name, locals())
 
 # Create your views here.
@@ -55,6 +55,7 @@ class PostDetail(TemplateView):
             return render(request, "404.html")
         comments = Comment.objects.all().filter(post_id=post['id'])
         form = CommentForm(request.POST)
+        title = post['title']
         if form.is_valid():
             inst = form.save(commit=False)
             inst.post_id = post['id']
