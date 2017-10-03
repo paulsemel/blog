@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block css %}
+	<link rel="stylesheet" type="text/css" href="{% static "css/detail.css" %}">
+	<link rel="stylesheet" type="text/css" href="{% static "css/codehilite.css" %}">
+{% endblock %}
+{% block content%}
+	<h1>{{post.title}}</h1>
+	<center><p><em>Posted by {{post.author}} on {{post.date}}</em><br /><br /></p></center>
+	<div id="post-content">
+		{{post.html | safe}}
+	</div>
+	{% for comment in comments %}
+		<h4>{{comment.author}}</h4>
+		<em>{{comment.created}}</em>
+		<p>{{comment.content}}</p>
+	{% endfor %}
+	<form action="" method="post">
+		{% csrf_token %}
+		{{ form }}
+		<input type="submit" value="Submit" />
+	</form>
+{% endblock %}
