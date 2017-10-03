@@ -9,16 +9,17 @@ have debug flags ? What if I want to detect those leaks on production softwares 
 Thus, this is what we will try to do.
 
 ## What kind of leak do we want to detect ?
-
+%%
 Basically, we can differenciate two kinds of leaks:
 
 * Non-allocated memory usage
 * Overflows (triggered by memory access or syscalls)
 
-To better understand this, let's give a basic example for each of them.
+To better understand this, let's take a look at an example.
 
+%%
 ####Non allocated memory use :
-
+%%
 ```c
 int *bar(int *var)
 {
@@ -49,7 +50,7 @@ Of course, in this example, this is very basic. But in way bigger projects, with
 I won't give an example of bufferoverflows here, as there is a lot of them on the Internet. The purpose of the first example was just to prove the possibility of this to happen.
 
 ## How do we detect non allocated memory usages ?
-
+%%
 Actually, this part is really easy. Here, we are going to differenciate two type of function :
 
 * Leaf functions
@@ -79,7 +80,7 @@ void VG_(track_pre_mem_write) (void (*f)(CorePart, ThreadId, Char*, Addr, SizeT)
 Now that we are able to detect those leaks, let's see how to detect overflow leaks.
 
 ## How do we detect overflows ?
-
+%%
 This part is way harder than the previous one. Indeed, let's recall that variables, types etc.. are just some abstractions that allow the developper to focus on more high-level stuff, and obviously to code really faster. But at the moment you have your binary, you have lost all those abstractions.
 
 And that's the problem we're facing. Without knowing anything about the types (and more precisely the sizes) of the chunks, we can't be sure a hundred pourcent that there is an overflow. Let's take a look at this example :
@@ -126,7 +127,7 @@ Two options here : either the leak has been issued the first time we accessed th
 _Note : I didn't talk about syscall memory leak, but the fact is that there is an API function that permits to register a call each time a syscall is issued, taking in parameter the address and the size accessed. So with the information we have, this is basically the same strategy as described above : if the chunk is already marked with a different size, there is a leak, otherwise we mark it and continue the execution of the program_
 
 ## Results
-
+%%
 First, let's be honnest. I didn't make tons of tests, but rather with few tricky homemade binaries, to see how many false positive and undetected leaks. And there is a lot.
 
 Indeed, the first problem I faced was that chunks could be the same size but in fact not the same type, which just lead our program not detect potential leaks. Secondly, I had to blacklist some libc functions, as those one were doing way too weird things on the stack (like using non allocated memory on purpose).
