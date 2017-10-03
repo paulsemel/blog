@@ -19,7 +19,7 @@ POSTS_META = [
         {
             'id': 1,
             'filename': 'valgrind.md',
-            'title': 'Detecting bad stack usage using Valgrind Core API',
+            'title': 'Detecting bad stack usages using Valgrind Core API',
             'author': 'Paul Semel',
             'date': '02-10-2017',
             'short': 'In this post, we will see what strategies we must employ to \
