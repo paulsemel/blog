@@ -18,5 +18,5 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.PostList.as_view()),
-    url(r'^posts/(?P<slug>[-\w]+)$', views.PostDetail.as_view())
+    url(r'^posts/(?P<slug>[-\w]+)/$', views.PostDetail.as_view())
 ]
