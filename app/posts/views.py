@@ -1,5 +1,6 @@
 import os
 import markdown
+from MarkdownBlankLine import blankline
 from templates.myposts import meta
 from django.shortcuts import render
 from django.views.generic import TemplateView
@@ -41,7 +42,7 @@ class PostDetail(TemplateView):
         title = post['title']
         f = open(os.path.join(os.path.dirname(meta.__file__), post['filename']), 'r')
         content = f.read()
-        post['html'] = markdown.markdown(content, ['codehilite', 'markdown.extensions.extra'])
+        post['html'] = markdown.markdown(content, ['codehilite', 'markdown.extensions.extra', blankline.makeExtension()])
         f.close()
         del posts, f, content
         form = CommentForm()
