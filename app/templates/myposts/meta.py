@@ -14,7 +14,7 @@ POSTS_META = [
             'author': 'Paul Semel',
             'date': '02-10-2017',
             'short': 'This post is a test post dealing with a lot of different tests, read it, you wont be disappointed',
-            'status': ENABLED
+            'status': DISABLED
         },
         {
             'id': 1,
