@@ -1,3 +1,23 @@
+from templates.myposts import meta
 from django.shortcuts import render
+from django.views.generic import TemplateView
+from django.utils.text import slugify
+
+def get_posts():
+    p = meta.POSTS_META
+    posts = []
+    for elt in p:
+        if elt['status'] == meta.ENABLED:
+            posts.append(elt)
+    return posts
+
+class PostList(TemplateView):
+    template_name = "posts/index.html"
+    def get(self, request):
+        posts = get_posts()
+        for post in posts:
+            post['slug'] = slugify(post['title'])
+        title = "Posts"
+        return render(request, self.template_name, locals())
 
 # Create your views here.
