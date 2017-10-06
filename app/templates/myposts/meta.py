@@ -6,6 +6,7 @@
 # changed, comments will be losts or even worst exchanged.
 DISABLED = 0
 ENABLED = 1
+TESTING = 2
 POSTS_META = [
         {
             'id': 0,
