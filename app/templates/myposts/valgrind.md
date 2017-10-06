@@ -8,8 +8,11 @@ have debug flags ? What if I want to detect those leaks on production softwares 
 
 Thus, this is what we will try to do.
 
-## What kind of leak do we want to detect ?
 %%
+## What kind of leak do we want to detect ?
+
+%%
+
 Basically, we can differenciate two kinds of leaks:
 
 * Non-allocated memory usage
@@ -49,7 +52,10 @@ Of course, in this example, this is very basic. But in way bigger projects, with
 
 I won't give an example of bufferoverflows here, as there is a lot of them on the Internet. The purpose of the first example was just to prove the possibility of this to happen.
 
+%%
+
 ## How do we detect non allocated memory usages ?
+%%
 %%
 Actually, this part is really easy. Here, we are going to differenciate two type of function :
 
