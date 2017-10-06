@@ -3,11 +3,9 @@ h2 {
 }
 h2 a {
 	color: inherit;
+	font-size: 22px;
 }
 
 h2 a:hover {
 	color: inherit;
-}
-
-p {
 }
