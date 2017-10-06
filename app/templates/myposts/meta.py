@@ -4,6 +4,9 @@
 
 # Be careful, comments are linked with posts with the id field. If those are
 # changed, comments will be losts or even worst exchanged.
+
+import datetime
+
 DISABLED = 0
 ENABLED = 1
 TESTING = 2
@@ -13,7 +16,7 @@ POSTS_META = [
             'filename': 'test.md',
             'title': 'Post test',
             'author': 'Paul Semel',
-            'date': '02-10-2017',
+            'date': datetime.datetime.strptime('02-10-2017', "%d-%m-%Y"),
             'short': 'This post is a test post dealing with a lot of different tests, read it, you wont be disappointed',
             'status': DISABLED
         },
@@ -22,9 +25,18 @@ POSTS_META = [
             'filename': 'valgrind.md',
             'title': 'Detecting bad stack usages using Valgrind Core API',
             'author': 'Paul Semel',
-            'date': '02-10-2017',
+            'date': datetime.datetime.strptime('02-10-2017', "%d-%m-%Y"),
             'short': 'In this post, we will see what strategies we must employ to \
-                      be able to detect bad stack usage such as buffer overflows.',
+                      be able to detect bad stack usages such as buffer overflows.',
             'status': ENABLED
+        },
+        {
+            'id': 2,
+            'filename': 'xtf-ipc-1.md',
+            'title': 'Implementating an IPC mechanism in a really basic Xen domU microkernel (XTF)',
+            'author': 'Paul Semel',
+            'date': datetime.datetime.strptime('05-10-2017', "%d-%m-%Y"),
+            'short': 'In this post, we will see how much troubles I had trying to write an IPC mechanism in the Xen Testing Framework microkernel',
+            'status': TESTING
         },
 ]

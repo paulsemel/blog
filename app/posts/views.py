@@ -8,13 +8,17 @@ from django.conf import settings
 from django.utils.text import slugify
 from posts.forms import CommentForm
 from posts.models import Comment
+import datetime
+
+init = False;
 
 def get_posts():
     p = meta.POSTS_META
     posts = []
     for elt in p:
-        if elt['status'] == meta.ENABLED:
+        if elt['status'] == meta.ENABLED or (elt['status'] == meta.TESTING and settings.DEBUG == True):
             posts.append(elt)
+            posts[-1]['parsed_date'] = posts[-1]['date'].strftime("%b, %d %Y")
     return posts
 
 class PostList(TemplateView):
@@ -42,7 +46,7 @@ class PostDetail(TemplateView):
         title = post['title']
         f = open(os.path.join(os.path.dirname(meta.__file__), post['filename']), 'r')
         content = f.read()
-        post['html'] = markdown.markdown(content, ['codehilite', 'markdown.extensions.extra', blankline.makeExtension()])
+        post['html'] = markdown.markdown(content, ['codehilite', 'markdown.extensions.extra', blankline.makeExtension(), 'markdown.extensions.nl2br'])
         f.close()
         del posts, f, content
         form = CommentForm()
