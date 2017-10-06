@@ -6,7 +6,7 @@
 {% endblock %}
 {% block content%}
 	<h1>{{post.title}}</h1>
-	<center><p><em>Posted by {{post.author}} on {{post.date}}</em><br /><br /></p></center>
+	<center><p><em>Posted by {{post.author}} on {{post.parsed_date}}</em><br /><br /></p></center>
 	<div id="post-content">
 		{{post.html | safe}}
 	</div>

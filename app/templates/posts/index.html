@@ -4,11 +4,12 @@
 	<link rel="stylesheet" type="text/css" href="{% static "css/post-detail.css" %}">
 {% endblock %}
 {% block content%}
+<br /><em> Hey !<br /> I'm a computer engineering student who loves system security and developpment. I only write those posts for fun and to share my work for anyone who might be interested.<br /> Feel free to leave a comment ! </em><br /><br />
 	<h1>Latest posts</h1><br />
 	{% for post in posts %}
 		<div align="center">
 			<h2><a href="posts/{{post.slug}}/">{{post.title}}</a></h2>
-			<em style="font-size: 13px;">By {{post.author}} on {{post.date}}</em>
+			<em style="font-size: 13px;">By {{post.author}} on {{post.parsed_date}}</em>
 			<p> <b>Abstract :</b> {{post.short}} </p>
 		</div>
 	{% endfor %}
