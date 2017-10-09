@@ -1,15 +1,15 @@
 {% load staticfiles %}
 <html>
-    <head>
-	<title>{{title}}</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css" %}">
-	<link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">
-	{% block css %}
-	{% endblock %}
-    </head>
-    <body>
+	<head>
+		<title>{{title}}</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css" %}">
+		<link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">
+		{% block css %}
+		{% endblock %}
+	</head>
+	<body>
 		<div class="row" style="padding-left:5px; padding-right:5px;">
 			<nav class="navbar navbar-default">
 				<div class="container-fluid">
@@ -19,7 +19,7 @@
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand" href="/">PaulSemel.com</a>
+						<a class="navbar-brand" href="/">PaulSemel.blog</a>
 					</div>
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<ul class="nav navbar-nav">
@@ -31,14 +31,43 @@
 			</nav>
 		</div>
 		<div>
-			<div class="container">
-				<div class="col-md-8 col-md-offset-2">
-					{% block content %}
-					{% endblock %}
+			<div class="col-md-8 col-md-offset-1">
+				{% block content %}
+				{% endblock %}
+			</div>
+			<div class="col-md-3 bootstrap snippets">
+				<div class="widget panel">
+					<div class="panel-body">
+						<h4 class="mb0">Latest Tweet
+							<i class="fa fa-twitter text-info pull-right"></i>
+						</h4>
+						<hr>
+						<ul class="list-table">
+							<li style="width:70px;">
+								<img async class="img-circle img-bordered-primary" src="https://twitter.com/semel_paul/profile_image?size=bigger" alt="" width="65px" height="65px">
+							</li>
+							<li class="text-left">
+								<h5 class="semibold ellipsis nm">Paul Semel</h5>
+							</li>
+						</ul>
+					</div>
+						<div class="col-xs-offset-1 col-xs-10"><a class="twitter-follow-button"
+		 href="https://twitter.com/semel_paul"
+		 data-size="large"
+		 data-show-count=false>
+								Follow</a></div>
+
+					<ul class="list-group">
+						<a class="twitter-timeline list-group-item"
+						   href="https://twitter.com/semel_paul"
+						   data-tweet-limit="10">
+						   Tweets by @semel_paul</a>
+					</ul>
 				</div>
 			</div>
 		</div>
 		<script src="{% static "js/jquery.min.js" %}"></script>
 		<script type="text/javascript" src="{% static "js/bootstrap.min.js" %}"></script>
+		<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 	</body>
 </html>
