@@ -1,12 +1,19 @@
-Today, if you want to check bad stack usage, you have two possibilities :
+Today, if you want to check bad stack usages, you have basically two possibilities :
 
-* Add code at compile time that helps you detect memory leak at runtime
-* Analyse the code at runtime with the help of debug symbols
+* Add code at compile time that helps you detect memory leak at runtime, like clang-sanitizer does
+* Or perform static/dynamic binary analysis
 
-Alright.. so why would I need something new, you might say ? Well, what if I do not
-have debug flags ? What if I want to detect those leaks on production softwares ?
+In this case, I chose the second option, because I was really interested by Valgrind tools.
 
-Thus, this is what we will try to do.
+Some of you might wonder why I wrote a new tool, and the reason is that I wanted to be able to check those leaks without having neither the source code of the program nor any debugging help (that said debugging flags for example).
+
+In fact, as I am a big fan of CTF challenges, I was wondering if there was a possibility to detect basic leaks just by having the binary (which is almost always the case in CTF). And this tool would also have been cool to test production software for those kind of basic leaks.
+
+Before starting this post, I wanted to warn you that I'm not going to introduce Valgrind, as this is not the purpose of this post.
+
+For a brief introduction, the only thing you might want to know is that Valgrind provides you an intermediate representation made from assembly, that will be compiled to assembly after your analysis. And the cool thing is that you can alter this representation, which is actually the starting point for being able to do cool stuff with Valgrind.
+
+As you will see, the hard thing doing this is that because Valgrind is building its IR from assembly code, we don't have as much information as you could have with an other IR (You don't have types for example, as you have those in IR like llvm).
 
 %%
 ## What kind of leak do we want to detect ?
