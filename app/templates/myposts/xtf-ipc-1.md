@@ -132,14 +132,4 @@ Test result: SUCCESS
 
 Well, ok, that's not really what happened.
 
-It works, but only sometimes, and depending on if I add or remove code, the frequency gets higher or lower.. hmmm that sounds like a concurrent access that is not handled or something.
-After at least half an hour looking my code to check if I wasn't just a jerk (yeah, it often happens), I tried to type in google "xenstore concurrent access".
-First, you have to know that the fact that concurent accesses was not handled by xenstored backend was just not a possiblity.. well I got [this](https://patchwork.kernel.org/patch/9501273/).
-
-So the funny thing is that while I was typing my Google request, I was considering the possibility that access the same path at the same time could possibly not be handled by xenstored. But that's actually worst than just this.
-According to this patch
-:	> xenbus is capable to have one access active only at one point of time
-
-So as far as I understand well this sentence, this means that whatever the path is, if two domains (or even one multithreaded domain) are making a request to xenstore at the same time, it is just not handled.
-
 _For the moment, this code won't be available, as it's not the final version, and as it's part of my internship. But it might normally become a PR, and if it turns to be upstream, I will update this post._
