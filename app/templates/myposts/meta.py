@@ -39,4 +39,14 @@ POSTS_META = [
             'short': 'In this post, we will see how much troubles I had trying to write an IPC mechanism in the Xen Testing Framework microkernel',
             'status': TESTING
         },
+        {
+            'id': 3,
+            'filename': 'dynamorio.md',
+            'title': 'Forbidding libc calls with DynamoRIO',
+            'author': 'Paul Semel',
+            'date': datetime.datetime.strptime('29-04-2018', "%d-%m-%Y"),
+            'short': 'In my school, there are projects that involves forbidding a few \
+                      libc functions. Let\'s see how we can detect cheaters !',
+            'status': ENABLED
+        },
 ]

@@ -1,0 +1,121 @@
+## DynamoRIO presentation
+%%
+DynamoRIO is a dynamic binary instrumentation tool, often shortened as DBI.
+
+Even if DBI tools might be really complex, the concept is pretty simple to understand. Basically, a DBI tool act as a virtual machine that runs the being analyzed binary. This is done this way to permit the user to interact dynamically with what the binary is doing, but also to modify the comportement of it.
+
+People that might already know DynamoRIO, know that what I've explained is not completely true, but I thought this way would be largely easier to understand than explaining DynamoRIO internals. For those who want a better understanding of how DynamoRIO works, [here is a cool link](https://pdfs.semanticscholar.org/presentation/4415/2007fea2b4f5f3b3f1f66d1d00aa0c88fd9b.pdf). To make it very short, DynamoRIO split the code into fragments (what we might call `basic blocks` in compiler language). Those fragments are given to the instrumentor, and then executed. It splits part of the binary into `modules`. Just so that you understand, a dynamic library (so the libc) is considered as a module in DynamoRIO.
+
+Ok, so, now that you know the basics of DynamoRIO, let's see how we can use it to detect calls to the libc.
+
+## What do we want to detect ?
+%%
+Here are a few examples that might be detected :
+
+```c
+int main(void)
+{
+  printf("LSE\n");
+}
+```
+
+```c
+int main(void)
+{
+  int (*ptf)(const char *, ...) = (int (*)(const char *, ...))get_libc_func("printf");
+  ptf("LSE\n");
+}
+```
+Ok.. I think this one needs some explainations. What the `get_libc_func` does is actually pretty simple. It basically search through the dynamic linker link map to find the symbol. Once it has done it, it returns its address. Pretty basic. Still, it might be really problematic !
+
+```c
+int whatever[10] = { 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 };
+
+int main(void)
+{
+  qsort(whatever, 10, sizeof(*whatever), &strcmp);
+  return 0;
+}
+```
+
+Ok. This code doesn't make any sense. But still, it shows something interesting. Indeed, let's say we authorize `qsort`, but we actually do forbidd `strcmp`. The problem is that, in this case, the strcmp function is not called from this code directly, but in the libc. This might be really problematic.
+
+De facto, we do not want to detect libc internal calls, because some authorized functions might call not authorized ones (like if we forbidd `write`, but authorize `printf`). We will need to find an other way to detect this.
+ 
+But first, let's see how we can detect (and get) libc loads.
+
+## Module instrumentation
+%%
+Thanks to the nice DynamoRIO API, we can have a callback to be called each time a new module is loaded into the binary. This will be really useful.
+
+What we need to do is basically search for the right module, and then get it's start address. This way, it will be easy to know whether our binary is interacting with this function.
+The second cool thing is that we can have the range of our main module address space. This way, we wille easily be able to detect "module's context switching".
+
+Here is an example of code that's doing this :
+
+```c
+if (dr_fragment_app_pc(tag) >= app_base && dr_fragment_app_pc(tag) < app_end)
+```
+
+This way, we know whether the executing code is inside the "user address space", or if it's in another module.
+
+## Detecting forbidden function calls/jumps
+%%
+The really cool thing with DynamoRIO is that it calls us at each new fragment. As we want to detect calls or jumps, we are sure that the entry point of the fragment will be, if any, the address of a forbidden function.
+This can be achieved by making sure that the previous fragment was executed in the userspace. In this case, we know that there has been a call to the forbidden function.
+
+Actually, this theorically works, but in practice, we might have a problem. For those who know how a dynamic linker works, you might have already guessed what problem we are facing right know..
+
+Indeed, the dynamic linker doesn't resolve symbols address at program start, but does it while the function is being called. I won't do a whole paragraph on how this work, but this technique is called `lazy bindings`, which consist of calling the dynamic linker resolver that will basically do what our `get_libc_func` was doing in the second example.
+
+The problem is that, this way, we are not going for the user address space to the libc's, but there is an intermediary, that is the linker address space ! To avoid this problem, we can ask the dynamic linker to patch all the calls at start and to not do lazy binding :
+
+```bash
+LD_BIND_NOW=1 ./program-to-run
+```
+
+Alright, now, we are happily detecting our two first examples. Now let's figure out how we can manage to detect the last one.
+
+## Memory reads instrumentation
+%%
+This one is a bit more tricky. If you already used a DBI tool like PIN, we will find the DynamoRIO's way of doing it less convenient than PIN's.
+Enough blabla, here is the piece of code doing this instrumentation :
+
+```c
+for (int i = 0; i < instr_num_srcs(instr); i++) {
+  if (opnd_is_memory_reference(instr_get_src(instr, i))) {
+
+    drreg_reserve_register(drcontext, bb, instr, NULL, &reg_tmp);
+    drreg_reserve_register(drcontext, bb, instr, NULL, &reg_ptr);
+    drutil_insert_get_mem_addr(drcontext, bb, instr,
+        instr_get_src(instr, i),
+        reg_ptr, reg_tmp);
+    dr_insert_clean_call(drcontext, bb, instr, (void *)clean_call,
+        false, 1, opnd_create_reg(reg_ptr));
+    drreg_unreserve_register(drcontext, bb, instr, reg_ptr);
+    drreg_unreserve_register(drcontext, bb, instr, reg_tmp);
+  }
+}
+```
+
+First, let me say that this is not really the cleanest way for doing it. Indeed, one might want to insert the memory addresses into a tls array, and analyse those memory addresses blocks per blocks. But I wanted to made it really simple, and I will probably come back to this in a few weeks.
+
+Anyway. Basically, what we are doing is reserving two registers, to insert a `get_mem_addr` instrumentation of the memory operand. After this call, the registers will be filled with the memory address of the read. Then, we can insert a call to one of our function, with as argument the so called registered. This way, we have a really simple way of checking the memory reads addresses.
+
+So, this way, we are able to check wether libc functions are read or not. And so forth detect the third example I gave.
+
+Here is an example of the result we might get (here, forbidden.txt contains about 300 functions) :
+
+```bash
+sh$ LD_BIND_NOW=1 ./bin64/drrun -c api/bin/libtest.so forbiden.txt -- ~/test
+
+lib : libc.so.6 - qsort addr : 0x00007f2fba8bcb10
+lib : libc.so.6 - strcmp addr : 0x00007f2fba914660
+qsort function is called
+strcmp function address is read
+```
+
+I have also run `tesseract` tool under DynamoRIO with the same amount of forbidden functions, and it appears that we are approximately loosing 2 seconds from a normal run. I was pretty happy about those results !
+
+Here is the [github link](https://github.com/paulsemel/dynamorio).
+%%
