@@ -1,5 +1,7 @@
 ## DynamoRIO presentation
 %%
+In my school, in their first year, students have to program some basic libc functions. As there will always be cheater, the goal of this project is to detect those cheaters. To do so, we will use a tool called DynamoRIO.
+
 DynamoRIO is a dynamic binary instrumentation tool, often shortened as DBI.
 
 Even if DBI tools might be really complex, the concept is pretty simple to understand. Basically, a DBI tool act as a virtual machine that runs the being analyzed binary. This is done this way to permit the user to interact dynamically with what the binary is doing, but also to modify the comportement of it.
