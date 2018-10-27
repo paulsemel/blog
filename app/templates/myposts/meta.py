@@ -31,6 +31,16 @@ POSTS_META = [
             'status': ENABLED
         },
         {
+            'id': 3,
+            'filename': 'dynamorio.md',
+            'title': 'Forbidding libc calls with DynamoRIO',
+            'author': 'Paul Semel',
+            'date': datetime.datetime.strptime('29-04-2018', "%d-%m-%Y"),
+            'short': 'In my school, there are projects that involves forbidding a few \
+                      libc functions. Let\'s see how we can detect cheaters !',
+            'status': ENABLED
+        },
+        {
             'id': 2,
             'filename': 'xtf-ipc-1.md',
             'title': 'Implementating an IPC mechanism in a really basic Xen domU microkernel (XTF)',
@@ -40,13 +50,12 @@ POSTS_META = [
             'status': TESTING
         },
         {
-            'id': 3,
-            'filename': 'dynamorio.md',
-            'title': 'Forbidding libc calls with DynamoRIO',
+            'id': 4,
+            'filename': 'llvm-gsoc-2018.md',
+            'title': 'Command line replacements in LLVM Binutils',
             'author': 'Paul Semel',
-            'date': datetime.datetime.strptime('29-04-2018', "%d-%m-%Y"),
-            'short': 'In my school, there are projects that involves forbidding a few \
-                      libc functions. Let\'s see how we can detect cheaters !',
+            'date': datetime.datetime.strptime('13-08-2018', "%d-%m-%Y"),
+            'short': 'In this post, I will present the work I\'ve done during my GSoC 2018 for LLVM',
             'status': ENABLED
         },
 ]
