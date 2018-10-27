@@ -1,5 +1,6 @@
-Django==1.11.5
-Markdown==2.6.9
-MarkdownBlankLine==0.1.3
-Pygments==2.2.0
-pytz==2017.2
+Django
+Markdown
+MarkdownBlankLine
+Pygments
+pytz
+django-simple-captcha
