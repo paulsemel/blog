@@ -1,6 +1,6 @@
 Django
 Markdown
-MarkdownBlankLine
+-e git://github.com/paulsemel/markdown.blankline#egg=MarkdownBlankLine
 Pygments
 pytz
 django-simple-captcha

@@ -46,7 +46,7 @@ class PostDetail(TemplateView):
         title = post['title']
         f = open(os.path.join(os.path.dirname(meta.__file__), post['filename']), 'r')
         content = f.read()
-        post['html'] = markdown.markdown(content, ['codehilite', 'markdown.extensions.extra', blankline.makeExtension(), 'markdown.extensions.nl2br'])
+        post['html'] = markdown.markdown(content, extensions=['codehilite', 'markdown.extensions.extra', blankline.makeExtension(), 'markdown.extensions.nl2br'])
         f.close()
         del posts, f, content
         form = CommentForm()
