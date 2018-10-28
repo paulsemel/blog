@@ -1,6 +1,7 @@
-Django
-Markdown
+django
+markdown
 -e git://github.com/paulsemel/markdown.blankline#egg=MarkdownBlankLine
-Pygments
+pygments
 pytz
 django-simple-captcha
+gunicorn
