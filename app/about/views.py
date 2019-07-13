@@ -9,7 +9,7 @@ class AboutView(TemplateView):
     def get(self, request):
         f = open("templates/about/about.md", "r")
         content = f.read()
-        html = markdown.markdown(content, ['codehilite', 'markdown.extensions.extra', 'markdown.extensions.nl2br', blankline.BlankLineExtension()])
+        html = markdown.markdown(content, extensions=['codehilite', 'markdown.extensions.extra', 'markdown.extensions.nl2br', blankline.BlankLineExtension()])
         f.close()
         del content, f
         return render(request, self.template_name, locals())
