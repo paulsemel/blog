@@ -6,6 +6,9 @@ services:
     restart: always
     volumes:
       - /var/lib/docker/volumes/pgdata/_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=blog
+      - POSTGRES_USER=django
     ports:
       - "5432:5432"
   web:

@@ -5,4 +5,4 @@ pygments
 pytz
 django-simple-captcha
 gunicorn
-psycopg2
+psycopg2-binary
