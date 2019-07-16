@@ -1,19 +1,14 @@
 pipeline {
-    agent {
-        dockerfile {
-          args '-p 9000:9000'
-        }
-    }
+    agent any
     stages {
         stage('Build') { 
             steps {
-                sh 'npm install' 
+                sh 'docker-compose build'
             }
         }
         stage('Deploy') {
             steps {
-                sh 'gatsby build'
-                sh 'gatsby serve'
+                sh 'docker-compose up -d'
             }
         }
     }
