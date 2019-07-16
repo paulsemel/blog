@@ -21,6 +21,8 @@ function BlogPost(props) {
                     <br />
                     <MDXRenderer>{post.code.body}</MDXRenderer>
                 </Container>
+                <br />
+                <br />
                 </Layout>
     )
 }
