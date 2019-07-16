@@ -6,5 +6,10 @@ pipeline {
                 sh 'npm install' 
             }
         }
+        stage('Deploy') {
+            steps {
+                sh 'npm serve'
+            }
+        }
     }
 }
