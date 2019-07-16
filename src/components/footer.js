@@ -25,8 +25,7 @@ const logoStyle = {
 class Footer extends React.Component {
   render() {
     return (
-      <Row style={style}>
-        <Col>
+        <Col style={style}>
           Paul Semel &#169; - Built with{" "}
           <Image style={logoStyle} src={ReactLogo} alt="ReactJS" title="ReactJS" />{" "}
           <Image
@@ -42,7 +41,6 @@ class Footer extends React.Component {
             title="GraphQL"
           />
         </Col>
-      </Row>
     )
   }
 }
