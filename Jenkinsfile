@@ -1,7 +1,7 @@
 pipeline {
     agent {
         dockerfile {
-          args '-p 8000:8000'
+          args '-p 9000:9000'
         }
     }
     stages {
@@ -12,7 +12,8 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'npm serve'
+                sh 'gatsby build'
+                sh 'gatsby serve'
             }
         }
     }
