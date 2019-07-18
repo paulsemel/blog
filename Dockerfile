@@ -20,4 +20,4 @@ RUN gatsby build
 EXPOSE 9000
 
 # There is currently a bug in pm2. This forces us to do this.
-CMD /bin/bash run.sh
+CMD exec /bin/bash run.sh
