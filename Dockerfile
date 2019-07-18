@@ -1,12 +1,7 @@
-FROM node:12-slim
+FROM node:12-alpine
 
-RUN apt update && \
-    apt upgrade -y && \
-    apt install -y build-essential python-dev musl-dev libvips-dev git ssh libgl-dev --no-install-recommends && \
-    rm -rf /var/lib/apt/lists/* && \
+RUN apk add --no-cache python-dev musl-dev make g++ autoconf automake libtool && \
     npm install -g gatsby pm2
-
-RUN ln -s /usr/lib/x86_64-linux-musl/libc.so /lib/libc.musl-x86_64.so.1
 
 RUN mkdir -p /app
 WORKDIR /app
