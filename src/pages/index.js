@@ -1,78 +1,64 @@
-import React from "react"
-import { Link, graphql, StaticQuery } from "gatsby"
-import Layout from "../components/layout"
-import { Card, CardDeck, Row, Col, Container } from "react-bootstrap"
+import React from 'react'
+import Layout from '../components/layout'
+import { Container, Col, Row, Image } from 'react-bootstrap';
+import { graphql, StaticQuery } from "gatsby"
+import MDXRenderer from "gatsby-mdx/mdx-renderer";
 import { TwitterTimelineEmbed } from "react-twitter-embed"
+import Thumb from "../images/thumb.jpg"
+import { SocialIcon } from 'react-social-icons';
+
+const thumbStyle = {
+  width: '100%',
+  height: 'auto',
+  maxWidth: '300px',
+}
 
 class IndexPage extends React.Component {
   render() {
     return (
-      <Layout>
-        <Container fluid={true}>
-          <br />
-          <Row>
-            <Col md={{ span: 9 }} style={{paddingLeft: '10px'}}>
-                <StaticQuery
-                  query={graphql`
-                    query ListQuery {
-                      allMdx(
-                        filter: {fileAbsolutePath: {regex: "/.*posts.*/i"}}
-                        sort: { order: DESC, fields: [frontmatter___date] }
-                        ) {
-                        edges {
-                          node {
-                            fields {
-                              slug
-                            }
-                            excerpt(pruneLength: 250)
-                            frontmatter {
-                              date(fromNow: true)
-                              title
-                              description
-                              author
-                            }
-                            timeToRead
-                          }
-                        }
+      <Layout title="Home">
+        <br />
+        <br />
+		  <Row>
+		  <Col
+		    sm={12} md={3}
+		    style={{marginLeft: '10px'}}
+		  >
+		  <Col className="justify-content-center" style={{width: '100%', display: 'flex'}} xs={12}>
+          <Image
+		    style={thumbStyle}
+            src={Thumb}
+            alt="me"
+            title="me"
+			roundedCircle
+          />
+		  </Col>
+		  <br />
+		  <Col className="justify-content-center" style={{width: '100%', display: 'flex'}} xs={12}>
+		  <SocialIcon url="https://www.linkedin.com/in/paul-semel/" style={{marginRight: '5px'}}/>
+		  <SocialIcon url="https://github.com/paulsemel" style={{marginRight: '5px'}}/>
+		  <SocialIcon url="https://twitter.com/semel_paul" />
+		  </Col>
+		  </Col>
+		  <Col style={{marginLeft: '10px', marginRight: '10px'}}>
+          <StaticQuery
+            query={graphql`
+              query AboutQuery {
+                mdx(
+                  fileAbsolutePath: {regex: "/.*pages/about.*/i"}
+                  ) {
+                      code {
+                        body
                       }
                     }
-                  `}
-                  render={data => (
-                    <CardDeck className="justify-content-sm-center justify-content-md-between">
-                      {data.allMdx.edges.map(({ node }, i) => (
-                      <Link
-                        to={node.fields.slug}
-                        style={{ textDecoration: "none" }}
-                      >
-                        <Card style={{ height: '20rem', width: '22rem' }}>
-                          <Card.Body>
-                            <Card.Title>{node.frontmatter.title}</Card.Title>
-                            <Card.Text>{node.excerpt}</Card.Text>
-                          </Card.Body>
-                          <Card.Footer className="text-muted">
-                            {node.frontmatter.author} - Posted {node.frontmatter.date} - {node.timeToRead} min read
-                          </Card.Footer>
-                        </Card>
-                        <br />
-                      </Link>
-                    ))}</CardDeck>
-                  )}
-                />
-            </Col>
-            <Col md={{ span: 3 }}
-                 className="justify-content-center"
-                 style={{display: 'flex'}}>
-              <div style={{maxWidth: '500px', minWidth: '200px'}}>
-                <TwitterTimelineEmbed
-                  sourceType="profile"
-                  screenName="semel_paul"
-                  options={{ height: 800 }}
-                />
-              </div>
-            </Col>
-          </Row>
-          <br /><br />
-        </Container>
+              }
+            `}
+            render={data => (
+              <MDXRenderer>{data.mdx.code.body}</MDXRenderer>
+            )}
+            />
+			</Col>
+			</Row>
       </Layout>
     )
   }

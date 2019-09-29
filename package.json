@@ -35,6 +35,7 @@
     "react-bootstrap": "^1.0.0-beta.9",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",
+    "react-social-icons": "^4.1.0",
     "react-twitter-embed": "^2.0.8"
   },
   "devDependencies": {
