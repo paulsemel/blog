@@ -29,8 +29,8 @@ class IndexPage extends React.Component {
               <Image
                 style={thumbStyle}
                 src={Thumb}
-                alt="me"
-                title="me"
+                alt="Paul Semel"
+                title="Paul Semel"
                 roundedCircle
               />
             </Col>
@@ -42,6 +42,7 @@ class IndexPage extends React.Component {
             </Col>
           </Col>
           <Col style={{ marginLeft: '10px', marginRight: '10px' }}>
+            <br />
             <StaticQuery
               query={graphql`
               query AboutQuery {
