@@ -11,8 +11,8 @@ class About extends React.Component {
           <br />
           <Row>
             <Col>
-                <StaticQuery
-                  query={graphql`
+              <StaticQuery
+                query={graphql`
                     query ListQuery {
                       allMdx(
                         filter: {fileAbsolutePath: {regex: "/.*posts.*/i"}}
@@ -36,9 +36,9 @@ class About extends React.Component {
                       }
                     }
                   `}
-                  render={data => (
-                    <CardDeck className="justify-content-sm-center justify-content-md-around">
-                      {data.allMdx.edges.map(({ node }, i) => (
+                render={data => (
+                  <CardDeck className="justify-content-sm-center justify-content-md-around">
+                    {data.allMdx.edges.map(({ node }, i) => (
                       <Link
                         to={node.fields.slug}
                         style={{ textDecoration: "none" }}
@@ -55,8 +55,8 @@ class About extends React.Component {
                         <br />
                       </Link>
                     ))}</CardDeck>
-                  )}
-                />
+                )}
+              />
             </Col>
           </Row>
           <br /><br />

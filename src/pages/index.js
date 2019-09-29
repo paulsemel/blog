@@ -19,30 +19,30 @@ class IndexPage extends React.Component {
       <Layout title="Home">
         <br />
         <br />
-		  <Row>
-		  <Col
-		    sm={12} md={3}
-		    style={{marginLeft: '10px'}}
-		  >
-		  <Col className="justify-content-center" style={{width: '100%', display: 'flex'}} xs={12}>
-          <Image
-		    style={thumbStyle}
-            src={Thumb}
-            alt="me"
-            title="me"
-			roundedCircle
-          />
-		  </Col>
-		  <br />
-		  <Col className="justify-content-center" style={{width: '100%', display: 'flex'}} xs={12}>
-		  <SocialIcon url="https://www.linkedin.com/in/paul-semel/" style={{marginRight: '5px'}}/>
-		  <SocialIcon url="https://github.com/paulsemel" style={{marginRight: '5px'}}/>
-		  <SocialIcon url="https://twitter.com/semel_paul" />
-		  </Col>
-		  </Col>
-		  <Col style={{marginLeft: '10px', marginRight: '10px'}}>
-          <StaticQuery
-            query={graphql`
+        <Row>
+          <Col
+            sm={12} md={3}
+            style={{ marginLeft: '5px', marginRight: '5px' }}
+          >
+            <Col className="justify-content-center" style={{ width: '100%', display: 'flex' }} xs={12}>
+              <Image
+                style={thumbStyle}
+                src={Thumb}
+                alt="me"
+                title="me"
+                roundedCircle
+              />
+            </Col>
+            <br />
+            <Col className="justify-content-center" style={{ width: '100%', display: 'flex' }} xs={12}>
+              <SocialIcon url="https://www.linkedin.com/in/paul-semel/" style={{ marginRight: '5px' }} />
+              <SocialIcon url="https://github.com/paulsemel" style={{ marginRight: '5px' }} />
+              <SocialIcon url="https://twitter.com/semel_paul" />
+            </Col>
+          </Col>
+          <Col style={{ marginLeft: '10px', marginRight: '10px' }}>
+            <StaticQuery
+              query={graphql`
               query AboutQuery {
                 mdx(
                   fileAbsolutePath: {regex: "/.*pages/about.*/i"}
@@ -53,12 +53,14 @@ class IndexPage extends React.Component {
                     }
               }
             `}
-            render={data => (
-              <MDXRenderer>{data.mdx.code.body}</MDXRenderer>
-            )}
+              render={data => (
+                <MDXRenderer>{data.mdx.code.body}</MDXRenderer>
+              )}
             />
-			</Col>
-			</Row>
+          </Col>
+        </Row>
+
+        <br /><br />
       </Layout>
     )
   }
