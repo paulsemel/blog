@@ -43,7 +43,7 @@ class About extends React.Component {
                         to={node.fields.slug}
                         style={{ textDecoration: "none" }}
                       >
-                        <Card style={{ height: '25rem', width: '24rem' }}>
+                        <Card style={{ minHeight: '25rem', maxWidth: '25rem' }}>
                           <Card.Body>
                             <Card.Title>{node.frontmatter.title}</Card.Title>
                             <Card.Text>{node.excerpt}</Card.Text>
