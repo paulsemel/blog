@@ -9,8 +9,9 @@ import { SocialIcon } from 'react-social-icons';
 
 const thumbStyle = {
   width: '100%',
-  height: 'auto',
+  height: '100%',
   maxWidth: '300px',
+  maxHeight: '300px',
 }
 
 class IndexPage extends React.Component {
