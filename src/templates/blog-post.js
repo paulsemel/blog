@@ -13,7 +13,7 @@ function BlogPost(props) {
     const { title,date } = post.frontmatter;
 
     return (
-                <Layout>
+                <Layout title={title}>
                 <br />
                 <br />
                 <Container style={style}>
