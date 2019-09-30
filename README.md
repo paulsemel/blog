@@ -4,6 +4,8 @@
 
 This is the ReactJS code of my personal blog.
 
+[![Build Status](http://jenkins.paulsemel.org/buildStatus/icon?job=paul-blog)](http://jenkins.paulsemel.org/job/paul-blog/)
+
 ## 🚀 Quick start
 
 1.  **GatsbyJS Installation**
