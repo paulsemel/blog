@@ -1,11 +1,10 @@
 import React from 'react'
 import Layout from '../components/layout'
-import { Container, Col, Row, Image } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { graphql, StaticQuery } from "gatsby"
 import MDXRenderer from "gatsby-mdx/mdx-renderer";
-import { TwitterTimelineEmbed } from "react-twitter-embed"
-import Thumb from "../images/thumb.jpg"
-import { SocialIcon } from 'react-social-icons';
+import Thumbnail from '../components/thumbnail'
+import Socials from '../components/socials';
 
 const thumbStyle = {
   width: '100%',
@@ -13,6 +12,18 @@ const thumbStyle = {
   maxWidth: '300px',
   maxHeight: '300px',
 }
+
+const aboutQuery = graphql`
+query AboutQuery {
+  mdx(
+    fileAbsolutePath: {regex: "/.*pages/about.*/i"}
+    ) {
+        code {
+          body
+        }
+      }
+}
+`
 
 class IndexPage extends React.Component {
   render() {
@@ -22,39 +33,21 @@ class IndexPage extends React.Component {
         <br />
         <Row>
           <Col
-            sm={12} md={3}
+            xs={12} md={3}
             style={{ marginLeft: '5px', marginRight: '5px' }}
           >
             <Col className="justify-content-center" style={{ width: '100%', display: 'flex' }} xs={12}>
-              <Image
-                style={thumbStyle}
-                src={Thumb}
-                alt="Paul Semel"
-                title="Paul Semel"
-                roundedCircle
-              />
+              <Thumbnail />
             </Col>
             <br />
             <Col className="justify-content-center" style={{ width: '100%', display: 'flex' }} xs={12}>
-              <SocialIcon url="https://www.linkedin.com/in/paul-semel/" style={{ marginRight: '5px' }} />
-              <SocialIcon url="https://github.com/paulsemel" style={{ marginRight: '5px' }} />
-              <SocialIcon url="https://twitter.com/semel_paul" />
+              <Socials />
             </Col>
           </Col>
           <Col style={{ marginLeft: '10px', marginRight: '10px' }}>
             <br />
             <StaticQuery
-              query={graphql`
-              query AboutQuery {
-                mdx(
-                  fileAbsolutePath: {regex: "/.*pages/about.*/i"}
-                  ) {
-                      code {
-                        body
-                      }
-                    }
-              }
-            `}
+              query={aboutQuery}
               render={data => (
                 <MDXRenderer>{data.mdx.code.body}</MDXRenderer>
               )}
