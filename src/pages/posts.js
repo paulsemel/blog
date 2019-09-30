@@ -3,7 +3,7 @@ import { Link, graphql, StaticQuery } from "gatsby"
 import Layout from "../components/layout"
 import { Card, CardDeck, Row, Col, Container } from "react-bootstrap"
 
-class About extends React.Component {
+class Posts extends React.Component {
   render() {
     return (
       <Layout title="Posts">
@@ -66,4 +66,4 @@ class About extends React.Component {
   }
 }
 
-export default About;
+export default Posts;
