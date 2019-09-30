@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        ANALYTICS_ID = credentials('google-analytics-tracking-id')
+    }
     stages {
         stage('Clean') {
           steps {
@@ -8,7 +11,7 @@ pipeline {
         }
         stage('Build') { 
             steps {
-                sh 'docker-compose build'
+                sh 'docker-compose build --build-arg GA_ID=$ANALYTICS_ID'
             }
         }
         stage('Deploy') {
