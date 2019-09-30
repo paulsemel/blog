@@ -4,8 +4,6 @@ ARG GA_ID
 
 ENV GA_TRACKING_ID $GA_ID
 
-RUN echo "GA_ID = $GA_ID"
-
 RUN apk add --no-cache python-dev musl-dev make g++ autoconf automake libtool && \
     npm install -g gatsby pm2
 
