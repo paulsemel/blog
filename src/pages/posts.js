@@ -3,6 +3,31 @@ import { Link, graphql, StaticQuery } from "gatsby"
 import Layout from "../components/layout"
 import { Card, CardDeck, Row, Col, Container } from "react-bootstrap"
 
+const PostsQuery = graphql`
+query ListQuery {
+  allMdx(
+    filter: {fileAbsolutePath: {regex: "/.*posts.*/i"}}
+    sort: { order: DESC, fields: [frontmatter___date] }
+    ) {
+    edges {
+      node {
+        fields {
+          slug
+        }
+        excerpt(pruneLength: 250)
+        frontmatter {
+          date(fromNow: true)
+          title
+          description
+          author
+        }
+        timeToRead
+      }
+    }
+  }
+}
+`
+
 class Posts extends React.Component {
   render() {
     return (
@@ -12,30 +37,7 @@ class Posts extends React.Component {
           <Row>
             <Col>
               <StaticQuery
-                query={graphql`
-                    query ListQuery {
-                      allMdx(
-                        filter: {fileAbsolutePath: {regex: "/.*posts.*/i"}}
-                        sort: { order: DESC, fields: [frontmatter___date] }
-                        ) {
-                        edges {
-                          node {
-                            fields {
-                              slug
-                            }
-                            excerpt(pruneLength: 250)
-                            frontmatter {
-                              date(fromNow: true)
-                              title
-                              description
-                              author
-                            }
-                            timeToRead
-                          }
-                        }
-                      }
-                    }
-                  `}
+                query={PostsQuery}
                 render={data => (
                   <CardDeck className="justify-content-sm-center justify-content-md-around">
                     {data.allMdx.edges.map(({ node }, i) => (
