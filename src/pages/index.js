@@ -5,6 +5,7 @@ import { graphql, StaticQuery } from "gatsby"
 import MDXRenderer from "gatsby-mdx/mdx-renderer";
 import Thumbnail from '../components/thumbnail'
 import Socials from '../components/socials';
+import { SocialIcon } from 'react-social-icons'
 
 const thumbStyle = {
   width: '100%',
@@ -42,6 +43,11 @@ class IndexPage extends React.Component {
             <br />
             <Col className="justify-content-center" style={{ width: '100%', display: 'flex' }} xs={12}>
               <Socials />
+            </Col>
+            <br />
+            <Col className="justify-content-center" style={{ width: '100%', display: 'flex', alignItems: 'center' }} xs={12}>
+            <a style={{marginRight: '5px'}} href='http://jenkins.paulsemel.org/job/paul-blog/'><img src='http://jenkins.paulsemel.org/buildStatus/icon?job=paul-blog' /></a>
+            <SocialIcon style={{marginLeft: '5px'}} network="sharethis" url="https://github.com/paulsemel/blog" label="Source code" />
             </Col>
           </Col>
           <Col style={{ marginLeft: '10px', marginRight: '10px' }}>
