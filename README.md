@@ -4,6 +4,8 @@
 
 This is the ReactJS code of my personal blog.
 
+This code is hosted at [https://paulsemel.org](https://paulsemel.org).
+
 [![Build Status](http://jenkins.paulsemel.org/buildStatus/icon?job=paul-blog)](http://jenkins.paulsemel.org/job/paul-blog/)
 
 ## 🚀 Quick start
