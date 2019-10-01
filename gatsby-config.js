@@ -1,7 +1,6 @@
 require("dotenv").config({
   path: `.env`,
 })
-console.log(process.env.GA_TRACKING_ID)
 module.exports = {
   siteMetadata: {
     title: "Paul Semel",
