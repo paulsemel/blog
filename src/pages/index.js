@@ -37,18 +37,24 @@ class IndexPage extends React.Component {
             xs={12} md={3}
             style={{ marginLeft: '5px', marginRight: '5px' }}
           >
-            <Col className="justify-content-center" style={{ width: '100%', display: 'flex' }} xs={12}>
-              <Thumbnail />
-            </Col>
+            <Row className="justify-content-center">
+              <Col xs="auto">
+                <Thumbnail />
+              </Col>
+            </Row>
             <br />
-            <Col className="justify-content-center" style={{ width: '100%', display: 'flex' }} xs={12}>
-              <Socials />
-            </Col>
+            <Row className="justify-content-center">
+              <Col xs="auto">
+                <Socials />
+              </Col>
+            </Row>
             <br />
-            <Col className="justify-content-center" style={{ width: '100%', display: 'flex', alignItems: 'center' }} xs={12}>
-            <a style={{marginRight: '5px'}} href='http://jenkins.paulsemel.org/job/paul-blog/'><img src='http://jenkins.paulsemel.org/buildStatus/icon?job=paul-blog' /></a>
-            <SocialIcon style={{marginLeft: '5px'}} network="sharethis" url="https://github.com/paulsemel/blog" label="Source code" />
-            </Col>
+            <Row className="justify-content-center">
+              <Col style={{ alignItems: 'center'}} xs="auto">
+                <a style={{ marginRight: '5px' }} href='http://jenkins.paulsemel.org/job/paul-blog/'><img src='http://jenkins.paulsemel.org/buildStatus/icon?job=paul-blog' /></a>
+                <SocialIcon style={{ marginLeft: '5px' }} network="sharethis" url="https://github.com/paulsemel/blog" label="Source code" />
+              </Col>
+            </Row>
           </Col>
           <Col style={{ marginLeft: '10px', marginRight: '10px' }}>
             <br />
