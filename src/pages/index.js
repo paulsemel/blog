@@ -50,9 +50,11 @@ class IndexPage extends React.Component {
             </Row>
             <br />
             <Row className="justify-content-center">
-              <Col style={{ alignItems: 'center'}} xs="auto">
+              <Col style={{ alignItems: 'center' }} xs="auto">
+                <span className="text-nowrap">
                 <a style={{ marginRight: '5px' }} href='http://jenkins.paulsemel.org/job/paul-blog/'><img src='http://jenkins.paulsemel.org/buildStatus/icon?job=paul-blog' /></a>
                 <SocialIcon style={{ marginLeft: '5px' }} network="sharethis" url="https://github.com/paulsemel/blog" label="Source code" />
+                </span>
               </Col>
             </Row>
           </Col>
