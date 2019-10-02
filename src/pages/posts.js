@@ -32,7 +32,6 @@ class Posts extends React.Component {
   render() {
     return (
       <Layout title="Posts">
-        <Container fluid={true}>
           <br />
           <Row>
             <Col>
@@ -62,7 +61,6 @@ class Posts extends React.Component {
             </Col>
           </Row>
           <br /><br />
-        </Container>
       </Layout>
     )
   }

@@ -6,6 +6,7 @@ import MDXRenderer from "gatsby-mdx/mdx-renderer";
 import Thumbnail from '../components/thumbnail'
 import Socials from '../components/socials';
 import { SocialIcon } from 'react-social-icons'
+import BlogInfo from '../components/bloginfo';
 
 const thumbStyle = {
   width: '100%',
@@ -33,10 +34,7 @@ class IndexPage extends React.Component {
         <br />
         <br />
         <Row>
-          <Col
-            xs={12} md={3}
-            style={{ marginLeft: '5px', marginRight: '5px' }}
-          >
+          <Col xs={12} md={3}>
             <Row className="justify-content-center">
               <Col xs="auto">
                 <Thumbnail />
@@ -44,21 +42,18 @@ class IndexPage extends React.Component {
             </Row>
             <br />
             <Row className="justify-content-center">
-              <Col xs="auto">
-                <Socials />
+              <Col className="text-nowrap" xs="auto">
+                <Socials style={{width: '140px'}}/>
               </Col>
             </Row>
             <br />
             <Row className="justify-content-center">
-              <Col style={{ alignItems: 'center' }} xs="auto">
-                <span className="text-nowrap">
-                <a style={{ marginRight: '5px' }} href='https://jenkins.paulsemel.org/job/paul-blog/'><img src='https://jenkins.paulsemel.org/buildStatus/icon?job=paul-blog' /></a>
-                <SocialIcon style={{ marginLeft: '5px' }} network="sharethis" url="https://github.com/paulsemel/blog" label="Source code" />
-                </span>
+              <Col className="text-nowrap" style={{ alignItems: 'center' }} xs="auto">
+                <BlogInfo />
               </Col>
             </Row>
           </Col>
-          <Col style={{ marginLeft: '10px', marginRight: '10px' }}>
+          <Col>
             <br />
             <StaticQuery
               query={aboutQuery}

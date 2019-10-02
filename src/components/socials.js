@@ -1,22 +1,31 @@
 import React from "react"
-import { Col } from "react-bootstrap"
+import {Row, Col } from 'react-bootstrap'
 import { SocialIcon } from 'react-social-icons'
 
-const thumbStyle = {
-    width: '100%',
-    height: '100%',
-    maxWidth: '300px',
-    maxHeight: '300px',
+const SocialStyle = {
+  width: '100%',
+  height: '0',
+  paddingBottom: '100%',
+}
+
+const WrapperStyle = {
+  padding: '4px',
 }
 
 class Socials extends React.Component {
   render() {
     return (
-        <>
-            <SocialIcon url="https://www.linkedin.com/in/paul-semel/" style={{ marginRight: '5px' }} />
-            <SocialIcon url="https://github.com/paulsemel" style={{ marginRight: '5px' }} />
-            <SocialIcon url="https://twitter.com/semel_paul" />
-        </>
+        <Row style={{...this.props.style}}>
+          <Col xs={4} style={WrapperStyle}>
+            <SocialIcon url="https://www.linkedin.com/in/paul-semel/" style={SocialStyle} />
+          </Col>
+          <Col xs={4} style={WrapperStyle}>
+            <SocialIcon url="https://github.com/paulsemel" style={SocialStyle} />
+          </Col>
+          <Col xs={4} style={WrapperStyle}>
+            <SocialIcon url="https://twitter.com/semel_paul" style={SocialStyle} />
+          </Col>
+        </Row>
     )
   }
 }

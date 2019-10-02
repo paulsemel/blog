@@ -1,6 +1,7 @@
 import React from "react"
 import BlogNav from "./blognav"
 import Footer from "./footer"
+import { Container } from 'react-bootstrap'
 import { Helmet } from 'react-helmet'
 
 const style = {
@@ -13,7 +14,7 @@ const style = {
 class Layout extends React.Component {
   render() {
     return (
-      <div style={style}>
+      <Container fluid={true} style={style}>
         <Helmet>
           <title>Paul Semel{this.props.title ? " - " + this.props.title : ""}</title>
         </Helmet>
@@ -21,7 +22,7 @@ class Layout extends React.Component {
         {this.props.children}
         <br />
         <Footer />
-      </div>
+      </Container>
     )
   }
 }

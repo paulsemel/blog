@@ -4,26 +4,23 @@ import {Container} from 'react-bootstrap'
 import { graphql } from 'gatsby'
 import MDXRenderer from "gatsby-mdx/mdx-renderer";
 
-const style = {
-    fontFamily: 'Roboto'
-}
 
 function BlogPost(props) {
     const post = props.data.mdx;
     const { title,date } = post.frontmatter;
 
     return (
-                <Layout title={title}>
+        <Layout title={title}>
+            <br />
+            <br />
+            <Container> { /* FIXME: This is not very clean... */ }
+                <h1>{title}</h1> <hr />
                 <br />
-                <br />
-                <Container style={style}>
-                    <h1>{title}</h1> <hr/>
-                    <br />
-                    <MDXRenderer>{post.code.body}</MDXRenderer>
-                </Container>
-                <br />
-                <br />
-                </Layout>
+                <MDXRenderer>{post.code.body}</MDXRenderer>
+            </Container>
+            <br />
+            <br />
+        </Layout>
     )
 }
 
