@@ -27,6 +27,10 @@ query AboutQuery {
 }
 `
 
+const CompStyle = {
+  width: '178px'
+}
+
 class IndexPage extends React.Component {
   render() {
     return (
@@ -43,13 +47,13 @@ class IndexPage extends React.Component {
             <br />
             <Row className="justify-content-center">
               <Col className="text-nowrap" xs="auto">
-                <Socials style={{width: '140px'}}/>
+                <Socials style={CompStyle}/>
               </Col>
             </Row>
-            <br />
+            <div style={{height: '15px'}} />
             <Row className="justify-content-center">
-              <Col className="text-nowrap" style={{ alignItems: 'center' }} xs="auto">
-                <BlogInfo />
+              <Col className="text-nowrap" xs="auto">
+                <BlogInfo style={CompStyle}/>
               </Col>
             </Row>
           </Col>
