@@ -1,5 +1,5 @@
 import React from "react"
-import { Row, Col, Image } from "react-bootstrap"
+import { Col, Image } from "react-bootstrap"
 import ReactLogo from "../images/react.png"
 import GatsbyLogo from "../images/gatsby.png"
 import GraphqlLogo from "../images/graphql.png"

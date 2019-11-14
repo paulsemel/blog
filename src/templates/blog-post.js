@@ -10,7 +10,7 @@ const style = {
 
 function BlogPost(props) {
     const post = props.data.mdx;
-    const { title,date } = post.frontmatter;
+    const { title } = post.frontmatter;
 
     return (
                 <Layout title={title}>
