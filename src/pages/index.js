@@ -2,7 +2,7 @@ import React from 'react'
 import Layout from '../components/layout'
 import { Col, Row } from 'react-bootstrap';
 import { graphql, StaticQuery } from "gatsby"
-import MDXRenderer from "gatsby-mdx/mdx-renderer";
+import MDXRenderer from "gatsby-plugin-mdx/mdx-renderer";
 import Thumbnail from '../components/thumbnail'
 import Socials from '../components/socials';
 import { SocialIcon } from 'react-social-icons'
@@ -19,9 +19,7 @@ query AboutQuery {
   mdx(
     fileAbsolutePath: {regex: "/.*pages/about.*/i"}
     ) {
-        code {
-          body
-        }
+        body
       }
 }
 `
@@ -63,7 +61,7 @@ class IndexPage extends React.Component {
             <StaticQuery
               query={aboutQuery}
               render={data => (
-                <MDXRenderer>{data.mdx.code.body}</MDXRenderer>
+                <MDXRenderer>{data.mdx.body}</MDXRenderer>
               )}
             />
           </Col>

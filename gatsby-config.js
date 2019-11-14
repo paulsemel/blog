@@ -20,7 +20,7 @@ module.exports = {
     },
     `gatsby-plugin-sharp`,
     {
-      resolve: `gatsby-mdx`,
+      resolve: `gatsby-plugin-mdx`,
       options: {
         gatsbyRemarkPlugins: [
           {
