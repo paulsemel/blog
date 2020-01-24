@@ -4,7 +4,7 @@ import Thumb from "../images/thumb.jpg"
 
 const thumbStyle = {
     width: '100%',
-    height: '100%',
+    height: '90%',
     maxWidth: '300px',
     maxHeight: '300px',
 }
